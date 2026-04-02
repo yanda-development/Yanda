@@ -176,9 +176,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   yandaText: {
-    fontSize: 50,
-    fontWeight: "400",
-    letterSpacing: 4,
+    fontSize: 48,
+    fontWeight: "300",
+    letterSpacing: 3,
     color: colors.textPrimary,
     fontFamily: fonts.regular,
     zIndex: 2,

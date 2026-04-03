@@ -73,7 +73,7 @@ export default function Onboarding({ onComplete }: OnboardingProps) {
   const flatListRef = useRef<FlatList>(null);
   const scrollX = useRef(new Animated.Value(0)).current;
 
-  const backgroundColor = "#1a2332";
+  const backgroundColor = "#0a0f1e";
   const textColor = "#ffffff";
   const buttonColor = colors.accent;
   const buttonTextColor = colors.primary;
@@ -365,7 +365,7 @@ const styles = StyleSheet.create({
     height: height * 0.55,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: height * 0.12,
+    marginTop: height * 0.16,
     zIndex: 1,
   },
   newDotsContainer: {

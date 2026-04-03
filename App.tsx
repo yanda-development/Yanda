@@ -34,7 +34,9 @@ export default function App() {
     const prepare = async () => {
       await SplashScreen.hideAsync();
 
-      const hasSeenOnboarding = await AsyncStorage.getItem("hasSeenOnboarding");
+      // TODO: Remove this temporary override to restore normal onboarding behavior
+      // const hasSeenOnboarding = await AsyncStorage.getItem("hasSeenOnboarding");
+      const hasSeenOnboarding = null; // Temporarily force onboarding to show
 
       if (!hasSeenOnboarding) {
         setShowOnboarding(true);

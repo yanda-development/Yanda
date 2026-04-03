@@ -16,6 +16,39 @@ export const fonts = {
     light: 'Montserrat_300Light',
     regular: 'Montserrat_400Regular',
     medium: 'Montserrat_500Medium',
+    semiBold: 'Montserrat_600SemiBold',
+    bold: 'Montserrat_700Bold',
+};
+
+export const typography = {
+    title: {
+        fontSize: 16,
+        fontWeight: '700' as const,
+        fontFamily: fonts.bold,
+        letterSpacing: 0.5,
+        lineHeight: 20,
+    },
+    description: {
+        fontSize: 11,
+        fontWeight: '400' as const,
+        fontFamily: fonts.regular,
+        letterSpacing: 0.3,
+        lineHeight: 16,
+    },
+    button: {
+        fontSize: 11,
+        fontWeight: '600' as const,
+        fontFamily: fonts.semiBold,
+        letterSpacing: 0.5,
+        textTransform: 'uppercase' as const,
+    },
+    skip: {
+        fontSize: 11,
+        fontWeight: '600' as const,
+        fontFamily: fonts.semiBold,
+        letterSpacing: 0.5,
+        opacity: 0.7,
+    },
 };
 
 export const globalStyles = StyleSheet.create({
@@ -38,6 +71,14 @@ export const globalStyles = StyleSheet.create({
     },
     textMedium: {
         fontFamily: fonts.medium,
+        color: colors.textPrimary,
+    },
+    textSemiBold: {
+        fontFamily: fonts.semiBold,
+        color: colors.textPrimary,
+    },
+    textBold: {
+        fontFamily: fonts.bold,
         color: colors.textPrimary,
     },
     textSecondary: {

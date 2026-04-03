@@ -1,29 +1,47 @@
 import React, { useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import * as SplashScreen from "expo-splash-screen";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
   useFonts,
   Montserrat_300Light,
   Montserrat_400Regular,
   Montserrat_500Medium,
+  Montserrat_600SemiBold,
+  Montserrat_700Bold,
 } from "@expo-google-fonts/montserrat";
 import AnimatedSplash from "./components/AnimatedSplash";
+import Onboarding from "./components/Onboarding";
+import MainApp from "./components/MainApp";
 
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {
   const [showAnimatedSplash, setShowAnimatedSplash] = useState(true);
+  const [showOnboarding, setShowOnboarding] = useState(false);
+  const [showMainApp, setShowMainApp] = useState(false);
   const [appReady, setAppReady] = useState(false);
 
   let [fontsLoaded] = useFonts({
     Montserrat_300Light,
     Montserrat_400Regular,
     Montserrat_500Medium,
+    Montserrat_600SemiBold,
+    Montserrat_700Bold,
   });
 
   useEffect(() => {
     const prepare = async () => {
       await SplashScreen.hideAsync();
+
+      const hasSeenOnboarding = await AsyncStorage.getItem("hasSeenOnboarding");
+
+      if (!hasSeenOnboarding) {
+        setShowOnboarding(true);
+      } else {
+        setShowMainApp(true);
+      }
+
       setAppReady(true);
     };
     prepare();
@@ -31,6 +49,12 @@ export default function App() {
 
   const handleAnimationFinish = () => {
     setShowAnimatedSplash(false);
+  };
+
+  const handleOnboardingComplete = async () => {
+    await AsyncStorage.setItem("hasSeenOnboarding", "true");
+    setShowOnboarding(false);
+    setShowMainApp(true);
   };
 
   if (!appReady || !fontsLoaded) {
@@ -41,9 +65,13 @@ export default function App() {
     return <AnimatedSplash onFinish={handleAnimationFinish} />;
   }
 
-  return (
-    <>
-      <StatusBar style="light" />
-    </>
-  );
+  if (showOnboarding) {
+    return <Onboarding onComplete={handleOnboardingComplete} />;
+  }
+
+  if (showMainApp) {
+    return <MainApp />;
+  }
+
+  return null;
 }
